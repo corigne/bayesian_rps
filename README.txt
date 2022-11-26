@@ -1,4 +1,4 @@
-# SimCity v1.0 README
+# Rock Paper Scissors v0.01 README
 ## Group 6 - CSCE 2110 - Section 002/213
 ### Members:
 - Chandler Garret
