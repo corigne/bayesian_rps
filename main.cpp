@@ -23,17 +23,28 @@ int main(int argc, char* argv[])
   
   if(!b_NOARGS)
   {
+    if(std::stol(argv[1]) <= 0)
+    {
+      std::cout << "You entered a number of rounds < or = 0." << std::endl;
+      std::cout << "When executing please oberve documentation." << std::endl;
+      exit(1);
+    } 
     unsigned long num_rounds = std::stol(argv[1]);
+  
     // Create a data structure to track wins, losses and ties for each algo.
     tracker record;
-    
-    // Loop through X matches of RPS where X == argv[1]
     
     //DEBUGGING LOGIC
     // currently splits 50/50 to test data structure and output
     if(b_DEBUG)
     {
       DEBUG(num_rounds, record);
+    }
+    
+    //NON-DEBUGGING COMPETITIVE LOGIC
+    for(unsigned long i = 0; i < num_rounds; i++)
+    {
+      
     }
     
     // Display the statistical results of the matches
