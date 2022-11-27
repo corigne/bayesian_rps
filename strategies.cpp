@@ -7,13 +7,19 @@ Description: Strategies
 #include "strategies.hpp"
 
 RPS GroupStrategy(){
-  RPS choice;
+  
+  //debug choice
+  RPS choice = ROCK;
+  
   //GROUP MAIN STRATEGY
   return choice;
 }
 
 RPS BigBadEvilCode(){
-  RPS choice;
+  
+  //debug choice
+  RPS choice = SCISSORS;
+  
   //RUNER UP
   return choice;
 }
