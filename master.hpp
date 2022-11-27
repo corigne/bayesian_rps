@@ -14,5 +14,10 @@ Description: Main Header File
 #include <string>
 #include <random>
 
+// Custom header includes go below here...
+
+#include "strategies.hpp"
+#include "tracker.hpp"
+#include "debug.hpp"
 
 #endif
