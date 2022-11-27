@@ -6,7 +6,57 @@ Description: Strategies
 */
 #include "strategies.hpp"
 
-RPS GroupStrategy(){
+int playRPS(RPS p1, RPS p2)
+{
+  //return 1 for a win, 0 for a tie, -1 for a loss
+  switch(p1)
+  {
+    case ROCK:
+    {
+      if(p2 == PAPER)
+        return -1;
+        
+      if(p2 == SCISSORS)
+        return 1;
+        
+      if(p2 == ROCK)
+        return 0;
+        
+      break;
+    }
+    
+    case PAPER:
+    {
+      if(p2 == SCISSORS)
+        return -1;
+        
+      if(p2 == ROCK)
+        return 1;
+      
+      if(p2 == PAPER)
+        return 0;
+        
+      break;
+    }
+    
+    case SCISSORS:
+    {
+      if(p2 == ROCK)
+        return -1;
+        
+      if(p2 == PAPER)
+        return 1;
+        
+      if(p2 == SCISSORS)
+        return 0;
+        
+      break;
+    }
+  }
+  return 0;
+}
+
+RPS GroupStrategy(int lastResult){
   
   //debug choice
   RPS choice = ROCK;
@@ -15,7 +65,7 @@ RPS GroupStrategy(){
   return choice;
 }
 
-RPS BigBadEvilCode(){
+RPS BigBadEvilCode(int lastResult){
   
   //debug choice
   RPS choice = SCISSORS;

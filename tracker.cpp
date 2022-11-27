@@ -22,6 +22,31 @@ void tracker::Tie()
   ties += 1;
 }
 
+void tracker::record_game(int result)
+{
+  switch(result)
+  {
+    //win
+    case 1:
+    {
+      this->P1_Win();
+      break;
+    }
+    //loss
+    case -1:
+    {
+      this->P2_Win();
+      break;   
+    }
+    //tie
+    case 0:
+    {
+      this->Tie();
+      break;
+    }
+  }
+}
+
 void tracker::print_results() const
 {
   //Prints the results after calculating the various metrics.

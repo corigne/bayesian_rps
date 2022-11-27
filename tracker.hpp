@@ -18,7 +18,10 @@ class tracker
     player p1;
     player p2;
     unsigned int ties;
-  
+    void P1_Win();
+    void P2_Win();
+    void Tie();
+   
   public:
     tracker()
     {
@@ -30,9 +33,8 @@ class tracker
       ties = 0;
     }
    
-    void P1_Win();
-    void P2_Win();
-    void Tie();
+    void record_game(int result);
+  
     void print_results() const;
 };
 

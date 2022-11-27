@@ -14,7 +14,7 @@ enum RPS{
   SCISSORS = 3
 };
 
-class rps_bay
+class rps_thomps
 {
   //in progress, for bayesian thompson sampling strategy
 };
@@ -26,9 +26,11 @@ class rps_ucb
 
 // Both stretegies shouls return an enum
 
-RPS GroupStrategy();
+int playRPS(RPS p1_choice, RPS p2_choice);
 
-RPS BigBadEvilCode();
+RPS GroupStrategy(int lastResult);
+
+RPS BigBadEvilCode(int lastResult);
 
 
 #endif

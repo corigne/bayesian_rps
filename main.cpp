@@ -7,7 +7,6 @@ Description: Main Function
 
 // Includes
 #include "master.hpp"
-#include <string>
 
 // Main Function
 
@@ -21,29 +20,49 @@ int main(int argc, char* argv[])
     std::cout << "**** DEBUG MODE ACTIVE ****" << std::endl;
   }
   
+  //guard statement against no arguments provided at execution
   if(!b_NOARGS)
   {
+    //guarge against negative #rounds
     if(std::stol(argv[1]) <= 0)
     {
       std::cout << "You entered a number of rounds < or = 0." << std::endl;
       std::cout << "When executing please oberve documentation." << std::endl;
       exit(1);
-    } 
+    }
     unsigned long num_rounds = std::stol(argv[1]);
   
     // Create a data structure to track wins, losses and ties for each algo.
     tracker record;
     
-    //DEBUGGING LOGIC
+    //DEBUG TEST
     // currently splits 50/50 to test data structure and output
     if(b_DEBUG)
     {
       DEBUG(num_rounds, record);
     }
     
-    //NON-DEBUGGING COMPETITIVE LOGIC
+    //COMPETITIVE LOGIC
+    
+    int last_result;
+    
     for(unsigned long i = 0; i < num_rounds; i++)
     {
+      RPS p1_choice, p2_choice;
+      
+      // last_result is:
+      // 1 for Main Strat Win
+      // -1 for BBEC / Runner Up Win
+      // 0 for TIE 
+      
+      p1_choice = GroupStrategy(last_result);
+      p2_choice = BigBadEvilCode(last_result);
+      
+      int result = playRPS(p1_choice, p2_choice);
+      
+      last_result = result;
+      
+      record.record_game(result);
       
     }
     
@@ -53,8 +72,10 @@ int main(int argc, char* argv[])
   }
   else
   {
+    //output error from NOARGS
     std::cout << "No arguments provided. Please enter the number of trials "
       << " to run as an argument." << std::endl;
+    exit(1);
   }
   
   

@@ -17,13 +17,13 @@ void DEBUG(unsigned long& num_rounds, tracker& record)
         {
           if(i % 2 == 0)
           {
-            record.P1_Win();
+            record.record_game(1);
             std::cout << ".";
             if(i == 80) std::cout << std::endl;
           }
           else
           {
-            record.P2_Win();
+            record.record_game(-1);
             std::cout << "-";
           }
         }
