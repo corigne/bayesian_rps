@@ -40,30 +40,30 @@ int main(int argc, char* argv[])
     if(b_DEBUG)
     {
       DEBUG(num_rounds, record);
-    }
-    
-    //COMPETITIVE LOGIC
-    
-    int last_result;
-    
-    for(unsigned long i = 0; i < num_rounds; i++)
+    }else
     {
-      RPS p1_choice, p2_choice;
+      //COMPETITIVE LOGIC
+    
+      int last_result;
+    
+      for(unsigned long i = 0; i < num_rounds; i++)
+      {
+        RPS p1_choice, p2_choice;
       
-      // last_result is:
-      // 1 for Main Strat Win
-      // -1 for BBEC / Runner Up Win
-      // 0 for TIE 
+        // last_result is:
+        // 1 for Main Strat Win
+        // -1 for BBEC / Runner Up Win
+        // 0 for TIE 
       
-      p1_choice = GroupStrategy(last_result);
-      p2_choice = BigBadEvilCode(last_result);
+        p1_choice = GroupStrategy(last_result);
+        p2_choice = BigBadEvilCode(last_result);
       
-      int result = playRPS(p1_choice, p2_choice);
+        int result = playRPS(p1_choice, p2_choice);
       
-      last_result = result;
+        last_result = result;
       
-      record.record_game(result);
-      
+        record.record_game(result);
+      }  
     }
     
     // Display the statistical results of the matches
