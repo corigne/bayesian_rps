@@ -8,18 +8,21 @@ Description: Strategies Header
 #ifndef _STRATEGIES_HPP_
 #define _STRATEGIES_HPP_
 
+#include <random>
+#include <vector>
+#include <iostream>
+#include <string>
+
+#include "bays.hpp"
+
 enum RPS{
+  NOCHOICE = 0,
   ROCK = 1,
   PAPER = 2,
   SCISSORS = 3
 };
 
-class rps_thomps
-{
-  //in progress, for bayesian thompson sampling strategy
-};
-
-class rps_ucb
+class ucb_arm
 {
   //in progress, for UCB strategy
 };
@@ -28,9 +31,13 @@ class rps_ucb
 
 int playRPS(RPS p1_choice, RPS p2_choice);
 
-RPS GroupStrategy(int lastResult);
+RPS GroupStrategy(bays_arm& r, bays_arm& p, bays_arm& s,
+  int p_choice, int p_result, bool debug);
 
 RPS BigBadEvilCode(int lastResult);
 
+RPS int_to_RPS(int it);
+
+std::string RPS_to_s(RPS rps);
 
 #endif

@@ -20,4 +20,6 @@ Description: Main Header File
 #include "tracker.hpp"
 #include "debug.hpp"
 
+#include "bays.hpp"
+
 #endif

@@ -45,17 +45,21 @@ int main(int argc, char* argv[])
       //COMPETITIVE LOGIC
     
       int last_result;
+      
+      bays_arm rock, paper, scissors;
+      
+      RPS p1_choice = NOCHOICE, p2_choice = NOCHOICE;
     
       for(unsigned long i = 0; i < num_rounds; i++)
       {
-        RPS p1_choice, p2_choice;
       
         // last_result is:
         // 1 for Main Strat Win
         // -1 for BBEC / Runner Up Win
-        // 0 for TIE 
-      
-        p1_choice = GroupStrategy(last_result);
+        // 0 for TIE
+        std::cout << "Game " << i+1 << " ";
+        p1_choice = GroupStrategy(rock, paper, scissors, p1_choice, 
+          last_result, b_DEBUG);
         p2_choice = BigBadEvilCode(last_result);
       
         int result = playRPS(p1_choice, p2_choice);

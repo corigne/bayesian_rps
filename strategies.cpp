@@ -5,22 +5,30 @@ Rock Paper Scissors
 Description: Strategies
 */
 #include "strategies.hpp"
+#include <random>
 
 int playRPS(RPS p1, RPS p2)
 {
+  int result = 0;
   //return 1 for a win, 0 for a tie, -1 for a loss
   switch(p1)
   {
+    case NOCHOICE:
+    {
+      result = -1;
+      std::cout << "NO CHOICE MADE BY P1 IN GAME ERROR" << std::endl;  
+    }
+    
     case ROCK:
     {
       if(p2 == PAPER)
-        return -1;
+        result = -1;
         
       if(p2 == SCISSORS)
-        return 1;
+        result = 1;
         
       if(p2 == ROCK)
-        return 0;
+        result = 0;
         
       break;
     }
@@ -28,13 +36,13 @@ int playRPS(RPS p1, RPS p2)
     case PAPER:
     {
       if(p2 == SCISSORS)
-        return -1;
+        result = -1;
         
       if(p2 == ROCK)
-        return 1;
+        result = 1;
       
       if(p2 == PAPER)
-        return 0;
+        result = 0;
         
       break;
     }
@@ -42,35 +50,160 @@ int playRPS(RPS p1, RPS p2)
     case SCISSORS:
     {
       if(p2 == ROCK)
-        return -1;
+        result = -1;
         
       if(p2 == PAPER)
-        return 1;
+        result = 1;
         
       if(p2 == SCISSORS)
-        return 0;
+        result = 0;
         
       break;
     }
   }
-  return 0;
+  
+  std::cout << "P1 chose " << RPS_to_s(p1) << ", P2 chose " 
+    << RPS_to_s(p2) << ", RESULT: ";
+  
+  if(result == 1)
+    std::cout << "Player 1 wins!" << std::endl;
+  if(result == 0)
+    std::cout << "Tied!" << std::endl;
+  if(result == -1)
+    std::cout << "Player 2 wins!" << std::endl;
+  
+  return result;
 }
 
-RPS GroupStrategy(int lastResult){
+RPS GroupStrategy(bays_arm& r, bays_arm& p, bays_arm& s,
+  int p_choice, int p_result, bool debug){
   
-  //debug choice
-  RPS choice = ROCK;
+  if(p_choice == 0)
+  {
+    r.initialize(1.0, 1.0);
+    p.initialize(1.0, 1.0);
+    s.initialize(1.0, 1.0);
+    
+    return int_to_RPS(rand()%3);
+  }
+  else
+  {
+    bool prevWon = (p_result == 1);
+    switch(p_choice)
+    {
+      case ROCK:
+        r.update(prevWon);
+        break;
+    
+      case PAPER:
+        p.update(prevWon);
+        break;
+    
+      case SCISSORS:
+        s.update(prevWon);
+        break;
+    }
+
+    std::vector<double> samples;
+    samples.push_back(r.sample());
+    samples.push_back(p.sample());
+    samples.push_back(s.sample());
+    RPS choice;
   
-  //GROUP MAIN STRATEGY
-  return choice;
+    double max = 0;
+    unsigned int max_index = 0;
+    //find highest sample
+    for(unsigned int i = 0; i < samples.size() ; i++)
+    {
+      if(samples[i] > max){
+        max = samples[i];
+        max_index = i;
+      }
+    }
+
+    // 0+1, ROCK, 1+1 PAPER, 2+1 SCISSORS
+    choice = int_to_RPS(max_index+1);
+    
+    if(debug)
+    {
+      switch(choice)
+      {
+        case NOCHOICE:
+          std::cout << "NO CHOICE MADE, ERROR" << std::endl;
+          break;
+      
+        case ROCK:
+          std::cout << "Bays chose ROCK" << std::endl;
+          break;
+      
+        case PAPER:
+          std::cout << "Bays chose PAPER" << std::endl;
+          break;
+      
+        case SCISSORS:
+          std::cout << "Bays chose SCISSORS" << std::endl;
+          break;
+      
+      }
+    }
+    return choice;
+  }
 }
 
 RPS BigBadEvilCode(int lastResult){
-  
+  std::mt19937 gen(rand());
   //debug choice
-  RPS choice = SCISSORS;
+  RPS choice = int_to_RPS(gen()%2 + 1);
   
   //RUNER UP
   return choice;
 }
 
+RPS int_to_RPS(int it)
+{
+  switch(it)
+  {
+    case 0:
+      return NOCHOICE;
+      break;
+    
+    case 1:
+      return ROCK;
+      break;
+    
+    case 2:
+      return PAPER;
+      break;
+    
+    case 3:
+      return SCISSORS;
+      break;
+    
+    default:
+      std::cout << "You entered something wrong (int_to_RPS) ROCK!" << std::endl;
+      return ROCK;
+  };
+}
+
+std::string RPS_to_s(RPS rps)
+{
+  switch(rps)
+  {
+    case ROCK:
+      return "ROCK";
+      break;
+    
+    case PAPER:
+      return "PAPER";
+      break;
+
+    case SCISSORS:
+      return "SCISSORS";
+      break;
+    
+    case NOCHOICE:
+      return "NOCHOICEMADEERROR";
+      break;
+    
+  }
+}
