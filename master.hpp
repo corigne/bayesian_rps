@@ -13,6 +13,8 @@ Description: Main Header File
 #include <sstream>
 #include <string>
 #include <random>
+#include <cstring>
+
 
 // Custom header includes go below here...
 
