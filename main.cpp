@@ -48,6 +48,8 @@ int main(int argc, char* argv[])
       
       bays_arm rock, paper, scissors;
       
+      bays_arm rock2, paper2, sciss2;
+      
       RPS p1_choice = NOCHOICE, p2_choice = NOCHOICE;
     
       for(unsigned long i = 0; i < num_rounds; i++)
@@ -60,8 +62,13 @@ int main(int argc, char* argv[])
         std::cout << "Game " << i+1 << " ";
         p1_choice = GroupStrategy(rock, paper, scissors, p1_choice, 
           last_result, b_DEBUG);
+        
         p2_choice = BigBadEvilCode(last_result);
-      
+        
+        /*
+        p2_choice = GroupStrategy(rock2, paper2, sciss2, p2_choice,
+          last_result*-1, b_DEBUG);
+        */
         int result = playRPS(p1_choice, p2_choice);
       
         last_result = result;

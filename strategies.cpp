@@ -68,7 +68,7 @@ int playRPS(RPS p1, RPS p2)
   if(result == 1)
     std::cout << "Player 1 wins!" << std::endl;
   if(result == 0)
-    std::cout << "Tied!" << std::endl;
+    std::cout << "Both players tied!" << std::endl;
   if(result == -1)
     std::cout << "Player 2 wins!" << std::endl;
   
@@ -84,11 +84,11 @@ RPS GroupStrategy(bays_arm& r, bays_arm& p, bays_arm& s,
     p.initialize(1.0, 1.0);
     s.initialize(1.0, 1.0);
     
-    return int_to_RPS(rand()%3);
+    return int_to_RPS(rand()%2 + 1);
   }
   else
   {
-    bool prevWon = (p_result == 1);
+    bool prevWon = (p_result == 1 || p_result == 0);
     switch(p_choice)
     {
       case ROCK:
