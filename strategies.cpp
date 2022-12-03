@@ -88,7 +88,7 @@ RPS GroupStrategy(bays_arm& r, bays_arm& p, bays_arm& s,
   }
   else
   {
-    bool prevWon = (p_result == 1);
+    bool prevWon = (p_result == 1 || p_result == 0);
     switch(p_choice)
     {
       case ROCK:
