@@ -5,7 +5,6 @@ Rock Paper Scissors
 Description: Win/Loss/Tie Datastructure Definition
 */
 #include "tracker.hpp"
-#include <iostream>
 
 void tracker::P1_Win()
 {
@@ -47,7 +46,7 @@ void tracker::record_game(int result)
   }
 }
 
-void tracker::print_results() const
+void tracker::print_results(std::string p1_name, std::string p2_name) const
 {
   //Prints the results after calculating the various metrics.
   unsigned long rounds = p1.wins + p2.wins + ties;
@@ -55,8 +54,43 @@ void tracker::print_results() const
   long double pct_ties = (long double)ties / rounds * 100;
   long double pct_losses = (long double)p2.wins / rounds * 100;
   
+  std::string winner, loser;
+  
+  if(p1.wins > p2.wins) // normal condition, we hope
+  {
+    winner = p1_name;
+    loser = p2_name;
+  }
+  else if(p2.wins > p1.wins) // swap p1 and p2 stats in the event of p1 loss
+  {
+    winner = p2_name;
+    loser = p1_name;
+    long double temp = pct_wins;
+    pct_wins = pct_losses;
+    pct_losses = temp;
+    
+  }
+  else // catches a pure tie, statistically improbable but still
+  {
+    std::cout << "It was a tie, how strange. Did someone cheat?" << std::endl;
+    return;
+  }
+  
+  std::cout << std:: endl;
+  
   std::cout << "Rounds: " << rounds << std::endl;
   std::cout << "Wins: " << p1.wins << " (" << pct_wins << "%)" << std::endl;
   std::cout << "Ties: " << ties << " (" << pct_ties << "%)" << std::endl;
   std::cout << "Losses: " << p2.wins << " (" << pct_losses << "%)" << std::endl;
+  
+  std::cout << std::endl;
+  
+  std::cout << "Winning Algorithm: " << winner << std::endl;
+  std::cout << "Win Pct: " << pct_wins << "%" << std::endl;
+  std::cout << "Tie Pct: " << pct_ties << "%" << std::endl << std::endl;
+  
+  std::cout << "Losing Algorithm: " << loser << std::endl;
+  std::cout << "Win Pct: " << pct_losses << "%" << std::endl;
+  std::cout << "Tie Pct: " << pct_ties << "%" << std::endl << std::endl;
+  
 }
