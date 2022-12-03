@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
     }
     
     // Display the statistical results of the matches
-    record.print_results();
+    record.print_results("Bayesian Thomspon Sampler (BTS)", "B.B.E.C");
     
   }
   else

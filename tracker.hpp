@@ -7,6 +7,9 @@ Description: Win/Loss/Tie Datastructure Declaration
 #ifndef _TRACKER_HPP_
 #define _TRACKER_HPP_
 
+#include <string>
+#include <iostream>
+
 typedef struct player
 {
   unsigned int wins;
@@ -35,7 +38,7 @@ class tracker
    
     void record_game(int result);
   
-    void print_results() const;
+    void print_results(std::string p1_name, std::string p2_name) const;
 };
 
 #endif
