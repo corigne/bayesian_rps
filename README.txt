@@ -9,13 +9,14 @@
 ### Compiling
 To compile, please use the following command:
 
-  >``g++ main.cpp -o main``
+  >``g++ *.cpp``
 
 ### Running
 
-Example: run >``./main 1000``
+Example: run >``./a.out 1000``
 
-The above will run 1000 trials.
+The above will run 1000 trials. You may change the number of trials to suit your needs.  
+This program has been tested to up to 1 billion trials successfully.
 
 If you would like to compete with the runer up strategy, replace the BigBadCode function's code.
 

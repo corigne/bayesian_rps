@@ -158,7 +158,6 @@ RPS BigBadEvilCode(ucb_arm& r, ucb_arm& p, ucb_arm& s, bool debug,
   // std::mt19937 gen(rand());
   
   //RUNER UP
-  
 
   if(p_choice == 0)
   {    
