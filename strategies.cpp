@@ -150,13 +150,82 @@ RPS GroupStrategy(bays_arm& r, bays_arm& p, bays_arm& s,
   }
 }
 
-RPS BigBadEvilCode(int lastResult){
-  std::mt19937 gen(rand());
-  //debug choice
-  RPS choice = int_to_RPS(gen()%2 + 1);
+RPS BigBadEvilCode(ucb_arm& r, ucb_arm& p, ucb_arm& s, bool debug,
+  int p_choice, int p_result, long curr_round){
+  
+  // RANDOM CHOICE
+  // RPS choice = int_to_RPS(gen()%2 + 1);
+  // std::mt19937 gen(rand());
   
   //RUNER UP
+  
+
+  if(p_choice == 0)
+  {    
+    return int_to_RPS(rand()%2 + 1);
+  }
+  else
+  {
+    bool prevWon = (p_result == 1 || p_result == 0);
+    switch(p_choice)
+    {
+      case ROCK:
+        r.update(prevWon);
+        break;
+    
+      case PAPER:
+        p.update(prevWon);
+        break;
+    
+      case SCISSORS:
+        s.update(prevWon);
+        break;
+    }
+
+    std::vector<double> samples;
+    samples.push_back(r.sample(curr_round));
+    samples.push_back(p.sample(curr_round));
+    samples.push_back(s.sample(curr_round));
+    RPS choice;
+  
+    double max = 0;
+    unsigned int max_index = 0;
+    //find highest sample
+    for(unsigned int i = 0; i < samples.size() ; i++)
+    {
+      if(samples[i] > max){
+        max = samples[i];
+        max_index = i;
+      }
+    }
+
+    // 0+1, ROCK, 1+1 PAPER, 2+1 SCISSORS
+    choice = int_to_RPS(max_index+1);
+    
+    if(debug)
+    {
+      switch(choice)
+      {
+        case NOCHOICE:
+          std::cout << "NO CHOICE MADE, ERROR" << std::endl;
+          break;
+      
+        case ROCK:
+          std::cout << "UCB chose ROCK" << std::endl;
+          break;
+      
+        case PAPER:
+          std::cout << "UCB chose PAPER" << std::endl;
+          break;
+      
+        case SCISSORS:
+          std::cout << "UCB chose SCISSORS" << std::endl;
+          break;
+      
+      }
+    }
   return choice;
+  }
 }
 
 RPS int_to_RPS(int it)

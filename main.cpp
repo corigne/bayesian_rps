@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
       
       bays_arm rock, paper, scissors;
       
-      bays_arm rock2, paper2, sciss2;
+      ucb_arm rock2, paper2, sciss2;
       
       RPS p1_choice = NOCHOICE, p2_choice = NOCHOICE;
     
@@ -63,7 +63,8 @@ int main(int argc, char* argv[])
         p1_choice = GroupStrategy(rock, paper, scissors, p1_choice, 
           last_result, b_DEBUG);
         
-        p2_choice = BigBadEvilCode(last_result);
+        p2_choice = BigBadEvilCode(rock2, paper2, sciss2, b_DEBUG,
+          p2_choice, last_result, i+1);
         
         /*
         p2_choice = GroupStrategy(rock2, paper2, sciss2, p2_choice,
