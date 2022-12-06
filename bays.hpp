@@ -1,7 +1,5 @@
 /*
-CSCE 2110 Section 002/213
 Author: Nathan Jodoin
-Rock Paper Scissors
 Description: Bayesian Sampling Strategy Header
 */
 #ifndef _BAYS_HPP_

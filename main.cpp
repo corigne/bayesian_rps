@@ -1,7 +1,5 @@
 /*
-CSCE 2110 Section 002/213
-Group 6 - Project 2
-Rock Paper Scissors
+Bayesian Thomspon Distribution vs UCB MAB Solution
 Description: Main Function
 */
 
