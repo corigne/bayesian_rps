@@ -3,7 +3,7 @@
 ### Compiling
 To compile, please use the following command:
 
-  >``g++ *.cpp``
+  > ``g++ *.cpp``
 
 ### Running
 
