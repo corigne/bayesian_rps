@@ -271,4 +271,5 @@ std::string RPS_to_s(RPS rps)
       break;
     
   }
+  return 0;
 }
